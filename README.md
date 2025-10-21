@@ -1,6 +1,6 @@
+<img width="1024" height="1024" alt="pokemonindex" src="https://github.com/user-attachments/assets/125d9427-dd1e-4133-b87c-8d19ce9f2713" />
 # Pokédex Dashboard
 (uni project) 
-
 Createde a super simple and interactive Pokémon analytics dashboard built with Streamlit that allows users to explore and analyze statistics for 1215 Pokémon across multiple generations.
 
 ## Features
