@@ -1,8 +1,7 @@
-# pokedex_dash
-(uni project)
 # Pokédex Dashboard
+(uni project) 
 
-An interactive Pokémon analytics dashboard built with Streamlit that allows users to explore and analyze statistics for 1215 Pokémon across multiple generations.
+Createde a super simple and interactive Pokémon analytics dashboard built with Streamlit that allows users to explore and analyze statistics for 1215 Pokémon across multiple generations.
 
 ## Features
 
