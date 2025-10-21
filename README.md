@@ -9,7 +9,7 @@ An interactive Pokémon analytics dashboard built with Streamlit that allows use
 - **Search Functionality**: Look up any Pokémon by name and view detailed stats
 - **Interactive Filters**: Filter Pokémon by type and HP range
 - **Data Visualization**: Scatter plot showing Attack stats across different Pokémon types
-- **Complete Pokédex**: Browse the full dataset of 800 Pokémon
+- **Complete Pokédex**: Browse the full dataset of 1215 Pokémon
 - **Export Data**: Download filtered results as CSV
 
 ## Installation
