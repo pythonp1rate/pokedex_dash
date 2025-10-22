@@ -14,7 +14,6 @@ if search:
     if result.empty:
         st.warning("No Pokémon found!")
     else:
-        # Use iloc to get each row by index instead of iterrows
         for i in range(len(result)):
             row = result.iloc[i]
             st.write("---")
