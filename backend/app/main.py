@@ -1,6 +1,7 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
+import requests
 from typing import Optional, List
 from pathlib import Path
 
@@ -114,3 +115,70 @@ def get_hp_range():
         "min": int(min_hp),
         "max": int(max_hp)
     }
+
+@app.get("/api/pokemon/{name}/image")
+def get_pokemon_image(name: str):
+    """Get Pokemon image URL from PokeAPI"""
+    try:
+        # PokeAPI uses lowercase names
+        pokemon_name = name.lower()
+        url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+        
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        
+        data = response.json()
+        
+        # try to get official artwork first, fallback to front_default
+        image_url = None
+        if 'sprites' in data:
+            if 'other' in data['sprites'] and 'official-artwork' in data['sprites']['other']:
+                image_url = data['sprites']['other']['official-artwork']['front_default']
+            elif 'front_default' in data['sprites']:
+                image_url = data['sprites']['front_default']
+        
+        if not image_url:
+            raise HTTPException(status_code=404, detail="Image not found for this Pokemon")
+        
+        return {"name": name, "image_url": image_url}
+        
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=404, detail=f"Pokemon '{name}' not found in PokeAPI")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching image: {str(e)}")
+
+@app.get("/api/pokemon/{name}/moves")
+def get_pokemon_moves(name: str, limit: Optional[int] = Query(None, description="Limit number of moves returned")):
+    """Get Pokemon moves from PokeAPI"""
+    try:
+        pokemon_name = name.lower()
+        url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+        
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        
+        data = response.json()
+        
+        moves = []
+        if 'moves' in data:
+            for move_entry in data['moves']:
+                move_info = {
+                    "name": move_entry['move']['name'],
+                    "url": move_entry['move']['url']
+                }
+                moves.append(move_info)
+        
+        # limit moves if specified
+        if limit and limit > 0:
+            moves = moves[:limit]
+        
+        return {
+            "name": name,
+            "moves": moves,
+            "total_moves": len(data.get('moves', []))
+        }
+        
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=404, detail=f"Pokemon '{name}' not found in PokeAPI")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching moves: {str(e)}")
