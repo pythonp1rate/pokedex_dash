@@ -1,4 +1,4 @@
-<img width="1024" height="1024" alt="pokemonindex" src="https://github.com/user-attachments/assets/125d9427-dd1e-4133-b87c-8d19ce9f2713" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/f01197f2-425d-4457-bb86-c3c189411ef5" />
 
 
 ## Pokédex
@@ -6,11 +6,9 @@
 **Uni Project**
 A pokemon dashboard where you can search and compare pokemon. Shows stats and type effectiveness stuff. Built with React for frontend, FastAPI for backend, and PostgreSQL for the database.
 
-<img width="1499" height="865" alt="image" src="https://github.com/user-attachments/assets/f73da3f6-5b02-46ab-920a-7b04e3266c21" />
-
-
 ## Features
-<img width="540" height="184" alt="image" src="https://github.com/user-attachments/assets/f9f82597-8e34-4d57-83b3-36ba8d199550" />
+<img width="598" height="251" alt="image" src="https://github.com/user-attachments/assets/9f48c2d6-5caa-4963-ba37-f967a9a7de18" />
+
 
 
 - Search for pokemon by name  
