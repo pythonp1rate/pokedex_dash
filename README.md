@@ -1,53 +1,50 @@
 <img width="1024" height="1024" alt="pokemonindex" src="https://github.com/user-attachments/assets/125d9427-dd1e-4133-b87c-8d19ce9f2713" />
 # Pokédex Dashboard
-(uni project) 
-Createde a super simple and interactive Pokémon analytics dashboard built with Streamlit that allows users to explore and analyze statistics for 1215 Pokémon across multiple generations.
+(uni project)
+
+A pokemon dashboard where you can search and compare pokemon. Shows stats and type effectiveness stuff. Built with React for frontend, FastAPI for backend, and PostgreSQL for the database.
 
 ## Features
 
-- **Search Functionality**: Look up any Pokémon by name and view detailed stats
-- **Interactive Filters**: Filter Pokémon by type and HP range
-- **Data Visualization**: Scatter plot showing Attack stats across different Pokémon types
-- **Complete Pokédex**: Browse the full dataset of 1215 Pokémon
-- **Export Data**: Download filtered results as CSV
+- Search for pokemon by name
+- Compare up to 4 pokemon at once to see battle advantages
+- Stats charts showing HP, Attack, Defense, Sp. Atk, Sp. Def, Speed
+- See which pokemon are strong/weak against each other
+- All 1215 pokemon stored in database
 
-## Installation
+## Tech Stack
 
-1. Clone the repository:
-```bash
-git clone https://github.com/pythonp1rate/pokedex_dash.git
-cd pokedex_dash
+Frontend: React with Vite, Recharts for charts
+Backend: FastAPI (Python), PostgreSQL database
+Docker for running the database
+
+## Project Structure
+
 ```
-
-2. Create a virtual environment:
-```bash
-python3 -m venv venv
-source venv/bin/activate
+pokedex_dash/
+├── backend/
+│   ├── app/
+│   │   ├── main.py          # API routes
+│   │   ├── database.py      # database stuff
+│   │   └── services/
+│   │       └── p_type.py    # type effectiveness logic
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── components/
+│   │   └── services/
+│   │       └── api.js
+│   └── package.json
+├── data/
+│   └── Pokemon.csv
+└── docker-compose.yml
 ```
-
-3. Install dependencies:
-```bash
-pip install streamlit pandas plotly
-```
-
-## Usage
-
-Run the Streamlit app:
-```bash
-streamlit run app.py
-```
-
-The app will open in your browser at `http://localhost:8501`
 
 ## Dataset
 
-The app uses the `Pokemon.csv` dataset containing stats for Pokémon across multiple generations including:
-- Base stats (HP, Attack, Defense, Special Attack, Special Defense, Speed)
-- Types (Primary and Secondary)
-- Generation information
+Uses Pokemon.csv with stats for 1215 pokemon including HP, Attack, Defense, Sp. Atk, Sp. Def, Speed, types, and generation info.
 
-## Technologies Used
+## Technologies
 
-- **Streamlit**: Web application framework
-- **Pandas**: Data manipulation and analysis
-- **Plotly Express**: Interactive data visualizations
+React, FastAPI, PostgreSQL, Docker, Recharts, Vite
