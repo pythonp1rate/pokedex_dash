@@ -1,8 +1,13 @@
 <img width="1024" height="1024" alt="pokemonindex" src="https://github.com/user-attachments/assets/125d9427-dd1e-4133-b87c-8d19ce9f2713" />
-Pokédex Dashboard
-(uni project)
 
+
+## Pokédex
+
+**Uni Project**
 A pokemon dashboard where you can search and compare pokemon. Shows stats and type effectiveness stuff. Built with React for frontend, FastAPI for backend, and PostgreSQL for the database.
+
+<img width="1499" height="865" alt="image" src="https://github.com/user-attachments/assets/f73da3f6-5b02-46ab-920a-7b04e3266c21" />
+
 
 ## Features
 
@@ -11,6 +16,9 @@ A pokemon dashboard where you can search and compare pokemon. Shows stats and ty
 - Stats charts showing HP, Attack, Defense, Sp. Atk, Sp. Def, Speed
 - See which pokemon are strong/weak against each other
 - All 1215 pokemon stored in database
+
+<img width="1782" height="905" alt="image" src="https://github.com/user-attachments/assets/cbe86335-5c47-4780-b06d-4f727bc1b0e7" />
+
 
 ## Tech Stack
 
