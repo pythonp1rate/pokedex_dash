@@ -32,12 +32,12 @@ function getLuminance(hexColor) {
 
 function PokemonRadarChart({ pokemon, height = 400 }) {
   const statsData = [
-    { stat: 'HP', value: pokemon.HP },
-    { stat: 'Attack', value: pokemon.Attack },
-    { stat: 'Defense', value: pokemon.Defense },
     { stat: 'Sp. Atk', value: pokemon['Sp. Atk'] },
-    { stat: 'Sp. Def', value: pokemon['Sp. Def'] },
-    { stat: 'Speed', value: pokemon.Speed }
+    { stat: 'Defense', value: pokemon.Defense },
+    { stat: 'Attack', value: pokemon.Attack },
+    { stat: 'HP', value: pokemon.HP },
+    { stat: 'Speed', value: pokemon.Speed },
+    { stat: 'Sp. Def', value: pokemon['Sp. Def'] }
   ];
 
   const pokemonType = pokemon.Type1 || 'Normal';
@@ -45,8 +45,16 @@ function PokemonRadarChart({ pokemon, height = 400 }) {
   let fillColor, strokeColor;
   
   if (pokemon.Type2 && pokemon.Type2.trim()) {
-    const type1Color = typeColors[pokemonType] || '#DDD';
-    const type2Color = typeColors[pokemon.Type2.trim()] || type1Color;
+    let type1Color = typeColors[pokemonType];
+    if (!type1Color) {
+      type1Color = '#DDD';
+    }
+    
+    const type2Trimmed = pokemon.Type2.trim();
+    let type2Color = typeColors[type2Trimmed];
+    if (!type2Color) {
+      type2Color = type1Color;
+    }
     
     const type1Lum = getLuminance(type1Color);
     const type2Lum = getLuminance(type2Color);
@@ -60,19 +68,37 @@ function PokemonRadarChart({ pokemon, height = 400 }) {
       strokeColor = type2Color;
     }
   } else {
-    fillColor = typeColors[pokemonType] || '#DDD';
-    strokeColor = pokemonType === 'Normal' ? '#8A8E7F' : fillColor;
+    fillColor = typeColors[pokemonType];
+    if (!fillColor) {
+      fillColor = '#DDD';
+    }
+    if (pokemonType === 'Normal') {
+      strokeColor = '#8A8E7F';
+    } else {
+      strokeColor = fillColor;
+    }
   }
 
   const renderCustomTick = (props) => {
-    const { payload, x, y, cx, cy, radius } = props;
+    const payload = props.payload;
+    const cx = props.cx;
+    const cy = props.cy;
+    const radius = props.radius;
     
     if (!payload || !payload.value) {
       return null;
     }
     
-    const angle = payload.coordinate ? (payload.coordinate * Math.PI) / 180 : 0;
-    const r = radius || 100;
+    let angle = 0;
+    if (payload.coordinate) {
+      angle = (payload.coordinate * Math.PI) / 180;
+    }
+    
+    let r = 100;
+    if (radius) {
+      r = radius;
+    }
+    
     const labelRadius = r + 35;
     const labelX = cx + labelRadius * Math.cos(angle);
     const labelY = cy + labelRadius * Math.sin(angle);
