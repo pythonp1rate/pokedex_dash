@@ -10,12 +10,14 @@ A pokemon dashboard where you can search and compare pokemon. Shows stats and ty
 
 
 ## Features
+<img width="400" height="290" alt="image" src="https://github.com/user-attachments/assets/01492e5d-1310-491d-bc6b-1748de2c5fe4" />
 
-- Search for pokemon by name
+- Search for pokemon by name  
 - Compare up to 4 pokemon at once to see battle advantages
-- Stats charts showing HP, Attack, Defense, Sp. Atk, Sp. Def, Speed
+- Stats charts showing HP, Attack, Defense, Sp. Atk, Sp. Def, Speed 
 - See which pokemon are strong/weak against each other
 - All 1215 pokemon stored in database
+
 
 <img width="1782" height="905" alt="image" src="https://github.com/user-attachments/assets/cbe86335-5c47-4780-b06d-4f727bc1b0e7" />
 
