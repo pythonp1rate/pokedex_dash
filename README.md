@@ -10,7 +10,8 @@ A pokemon dashboard where you can search and compare pokemon. Shows stats and ty
 
 
 ## Features
-<img width="400" height="290" alt="image" src="https://github.com/user-attachments/assets/01492e5d-1310-491d-bc6b-1748de2c5fe4" />
+<img width="540" height="184" alt="image" src="https://github.com/user-attachments/assets/f9f82597-8e34-4d57-83b3-36ba8d199550" />
+
 
 - Search for pokemon by name  
 - Compare up to 4 pokemon at once to see battle advantages
