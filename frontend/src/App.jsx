@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import logo from './assets/pokeindex_logo.png';
 import { searchPokemon } from './services/api';
-import PokemonRadarChart from './components/RadarChart';
 import BattleAdvantageCards from './components/BattleAdvantageCards';
 import './App.css';
 
@@ -15,10 +14,13 @@ function App() {
 
   const getPokemonImage = async (name) => {
     try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
-      if (!response.ok) return null;
+      const lowerName = name.toLowerCase();
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${lowerName}`);
+      if (!response.ok) {
+        return null;
+      }
       const data = await response.json();
-      if (data.sprites && data.sprites.other && data.sprites.other['official-artwork']) {
+      if (data.sprites && data.sprites.other && data.sprites.other['official-artwork'] && data.sprites.other['official-artwork'].front_default) {
         return data.sprites.other['official-artwork'].front_default;
       }
       if (data.sprites && data.sprites.front_default) {
@@ -58,7 +60,11 @@ function App() {
       setPokemonResults(uniquePokemon);
       
       // get images
-      const newImageMap = { ...pokemonImages };
+      const newImageMap = {};
+      // copy existing images
+      for (let key in pokemonImages) {
+        newImageMap[key] = pokemonImages[key];
+      }
       for (let i = 0; i < uniquePokemon.length; i++) {
         const pokemon = uniquePokemon[i];
         if (!newImageMap[pokemon.Name]) {
@@ -85,10 +91,12 @@ function App() {
     
     if (!pokemonImages[pokemon.Name]) {
       const imgUrl = await getPokemonImage(pokemon.Name);
-      setPokemonImages(prev => ({
-        ...prev,
-        [pokemon.Name]: imgUrl
-      }));
+      const updatedImages = {};
+      for (let key in pokemonImages) {
+        updatedImages[key] = pokemonImages[key];
+      }
+      updatedImages[pokemon.Name] = imgUrl;
+      setPokemonImages(updatedImages);
     }
     
     setComparedPokemon([...comparedPokemon, pokemon]);
@@ -122,30 +130,62 @@ function App() {
 
         <div className="results">
           {pokemonResults.length > 0 && (
-            <div className="pokemon-list">
-              {pokemonResults.map((pokemon) => (
-                <div key={pokemon.Name} className="pokemon-card">
-                  {pokemonImages[pokemon.Name] && (
-                    <img 
-                      src={pokemonImages[pokemon.Name]} 
-                      alt={pokemon.Name}
-                      className="pokemon-image"
-                    />
-                  )}
-                  <h2>{pokemon.Name}</h2>
-                  <p>Type: {pokemon.Type1} {pokemon.Type2 && `/ ${pokemon.Type2}`}</p>
-                  <p>HP: {pokemon.HP} | Attack: {pokemon.Attack} | Defense: {pokemon.Defense}</p>
-                  <p>Total Stats: {pokemon.Total}</p>
-                  <button 
-                    onClick={() => addToComparison(pokemon)}
-                    className="compare-button"
-                    disabled={comparedPokemon.some(p => p.Name === pokemon.Name) || comparedPokemon.length >= 4}
+            <div className="search-results-list">
+              {pokemonResults.map((pokemon) => {
+                // check if already added
+                let isAlreadyAdded = false;
+                for (let i = 0; i < comparedPokemon.length; i++) {
+                  if (comparedPokemon[i].Name === pokemon.Name) {
+                    isAlreadyAdded = true;
+                    break;
+                  }
+                }
+                
+                let isDisabled = false;
+                if (isAlreadyAdded || comparedPokemon.length >= 4) {
+                  isDisabled = true;
+                }
+                
+                let opacityStyle = 1;
+                if (isDisabled) {
+                  opacityStyle = 0.6;
+                }
+                
+                // build type string
+                let typeString = pokemon.Type1;
+                // check if pokemon has a second type that is not empty
+                if (pokemon.Type2 && pokemon.Type2.length > 0 && pokemon.Type2 !== '' && pokemon.Type2 !== ' ') {
+                  typeString = pokemon.Type1 + ' / ' + pokemon.Type2;
+                }
+                
+                return (
+                  <div 
+                    key={pokemon.Name} 
+                    className="search-result-item"
+                    onClick={() => {
+                      if (!isDisabled) {
+                        addToComparison(pokemon);
+                      }
+                    }}
+                    style={{ 
+                      opacity: opacityStyle
+                    }}
                   >
-                    {comparedPokemon.some(p => p.Name === pokemon.Name) ? 'Already Added' : 'Add to Compare'}
-                  </button>
-                  <PokemonRadarChart pokemon={pokemon} />
-                </div>
-              ))}
+                    {pokemonImages[pokemon.Name] && (
+                      <img 
+                        src={pokemonImages[pokemon.Name]} 
+                        alt={pokemon.Name}
+                        className="search-result-image"
+                      />
+                    )}
+                    <div className="search-result-info">
+                      <h3>{pokemon.Name}</h3>
+                      <p>Type: {typeString}</p>
+                      {isAlreadyAdded && <span className="already-added-badge">Already Added</span>}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

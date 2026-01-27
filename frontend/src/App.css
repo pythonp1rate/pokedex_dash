@@ -60,35 +60,60 @@
   max-width: 800px;
 }
 
-.pokemon-list {
-  display: grid;
-  gap: 20px;
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.pokemon-card {
+.search-result-item {
   background: white;
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: background-color 0.2s;
+}
+
+.search-result-item:hover:not([style*="opacity: 0.6"]) {
+  background-color: #f0f0f0;
+}
+
+.search-result-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.search-result-info {
+  flex: 1;
   text-align: left;
 }
 
-.pokemon-card h2 {
-  margin-top: 0;
+.search-result-info h3 {
+  margin: 0 0 5px 0;
   color: #282c34;
 }
 
-.pokemon-card p {
-  margin: 8px 0;
+.search-result-info p {
+  margin: 0;
   color: #666;
+  font-size: 14px;
 }
 
-.pokemon-image {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  margin-bottom: 15px;
+.already-added-badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 4px 8px;
+  background-color: #ccc;
+  color: #666;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
 .compare-button {
