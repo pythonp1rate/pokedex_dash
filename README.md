@@ -18,7 +18,7 @@ A pokemon dashboard where you can search and compare pokemon. Shows stats and ty
 - All 1215 pokemon stored in database
 
 
-<img width="1782" height="905" alt="image" src="https://github.com/user-attachments/assets/cbe86335-5c47-4780-b06d-4f727bc1b0e7" />
+<img width="2197" height="916" alt="image" src="https://github.com/user-attachments/assets/be534efd-7ba6-4c46-97f6-653af724b8bf" />
 
 
 ## Tech Stack
