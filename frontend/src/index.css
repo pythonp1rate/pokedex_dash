@@ -1,11 +1,18 @@
+@font-face {
+  font-family: 'PokemonGB';
+  src: url('/fonts/pokemon-gb.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light;
-  color: #213547;
-  background-color: #f5f5f5;
+  color-scheme: dark;
+  color: #ffffff;
+  background-color: #1a1a1a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
