@@ -9,15 +9,11 @@ function StatsBars({ pokemon }) {
   ];
 
   const maxStat = 200;
-  const minOpacity = 0.2;
-  const maxOpacity = 1.0;
 
   return (
     <div className="stats-bars-container">
       {stats.map((stat) => {
         const barWidth = (stat.value / maxStat) * 100;
-        const normalizedValue = stat.value / maxStat;
-        const opacity = minOpacity + (maxOpacity - minOpacity) * normalizedValue;
         
         return (
           <div key={stat.name} className="stats-bar-row">
@@ -27,8 +23,7 @@ function StatsBars({ pokemon }) {
               <div 
                 className="stats-bar"
                 style={{
-                  width: `${barWidth}%`,
-                  opacity: opacity
+                  width: `${barWidth}%`
                 }}
               />
             </div>
